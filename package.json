@@ -4,6 +4,7 @@
   "description": "Repositório para inicio do curso em desenvolvimento e programação pela curso.dev",
   "main": "index.js",
   "scripts": {
+    "serve": "next dev",
     "dev": "next dev",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
@@ -13,6 +14,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.19.2",
     "next": "^13.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
