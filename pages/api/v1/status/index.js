@@ -1,9 +1,26 @@
 import database from "infra/database.js";
 
 async function status(request, response) {
-  const result = await database.query("SELECT 1 + 1;");
-  console.log(result);
-  response.status(200).send("Alunos do curso.dev sao acima da media");
+  const updatedAt = new Date().toISOString();
+
+  const databaseVersionresult = await database.query("SHOW server_version;");
+  const databaseVersionValue = databaseVersionresult.rows[0].server_version;
+
+  const databaseMaxConnectionsResult = await database.query(
+    "SHOW max_connections;",
+  );
+  const databaseMaxConnectionsValue =
+    databaseMaxConnectionsResult.rows[0].max_connections;
+
+  response.status(200).json({
+    updated_at: updatedAt,
+    dependencies: {
+      database: {
+        version: databaseVersionValue,
+        max_connections: parseInt(databaseMaxConnectionsValue),
+      },
+    },
+  });
 }
 
 export default status;
