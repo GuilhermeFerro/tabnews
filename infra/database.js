@@ -7,7 +7,7 @@ async function query(queryObject) {
     user: process.env.POSTGRES_USER,
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
-    ssl: process.env.NODE_ENV === "development" ? false : true,
+    ssl: getSSLValues(),
   });
 
   try {
@@ -26,12 +26,12 @@ export default {
   query: query,
 };
 
-// function getSSLValues() {
-//   if (process.env.POSTGRES_CA) {
-//     return {
-//       ca: postgres.env.CA,
-//     };
-//   }
+function getSSLValues() {
+  if (process.env.POSTGRES_CA) {
+    return {
+      ca: postgres.env.CA,
+    };
+  }
 
-//   return process.env.NODE_ENV === "development" ? true : false;
-// }
+  return process.env.NODE_ENV === "development" ? false : true;
+}
