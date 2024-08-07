@@ -1,4 +1,3 @@
-import { TRACE_OUTPUT_VERSION } from "next/dist/shared/lib/constants";
 import migrationRunner from "node-pg-migrate";
 import { join } from "node:path";
 import database from "infra/database.js";
